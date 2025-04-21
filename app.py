@@ -108,7 +108,7 @@ server = app.server
 app.layout = html.Div(
     [
         html.Div(
-            style={"display": "flex", "width": "95%", "height": "80vh"},
+            style={"display": "flex", "width": "100%", "height": "80vh"},
             children=[
                 # Map on the left
                 html.Div(
