@@ -301,6 +301,15 @@ def update_all_visuals(click_data):
             borderwidth=0,
         ),
     )
+    fig_bar.update_traces(
+        selector=dict(name="Female"),
+        marker_color="rgb(239,85,59)",
+    )
+    fig_bar.update_traces(
+        selector=dict(name="Male"),
+        marker_color="rgb(99, 110, 250)",
+    )
+
     fig_bar.update_yaxes(fixedrange=True, title_font_size=12)
 
     # add vertical lines at break years, shifted halfway
@@ -327,6 +336,7 @@ def update_all_visuals(click_data):
         ],
         title=f"Labor distribution by sex ({latest})",
     )
+    fig_pie.update_traces(marker=dict(colors=["rgb(239,85,59)", "rgb(99, 110, 250)"]))
 
     fig_pie.update_traces(textposition="inside", textinfo="label+percent")
     fig_pie.update_layout(
