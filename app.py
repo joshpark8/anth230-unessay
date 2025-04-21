@@ -37,7 +37,7 @@ fig = px.choropleth(
     hover_data={"Income Ratio": ":.2f"},
     projection="natural earth",
     title="Global Sex-based Income Inequality Heatmap",
-    color_continuous_scale=px.colors.sequential.Bluered,  # ← pick any built‑in scale!
+    color_continuous_scale=px.colors.sequential.Bluered,
 )
 
 fig.update_layout(
@@ -68,12 +68,10 @@ x = np.linspace(data.min(), data.max(), 200)
 
 y = norm.pdf(x, loc=mu, scale=sigma)
 
-# 5) Build the figure: density histogram + normal curve
 hist_vals, hist_edges = np.histogram(data, bins=30, density=True)
 
 fig_norm = go.Figure()
 
-# a) density histogram
 fig_norm.add_trace(
     go.Bar(
         x=hist_edges[:-1],
@@ -84,7 +82,6 @@ fig_norm.add_trace(
     )
 )
 
-# b) fitted normal curve
 fig_norm.add_trace(
     go.Scatter(
         x=x,
@@ -94,8 +91,6 @@ fig_norm.add_trace(
         name=f"Normal fit (μ={mu:.2f}, σ={sigma:.2f})",
     )
 )
-
-# 6) Tidy up
 fig_norm.update_layout(
     title="Distribution of F/M Ratios with Normal Fit",
     xaxis_title="Ratio (USD)",
@@ -106,15 +101,12 @@ fig_norm.update_layout(
     margin=dict(l=40, r=20, t=40, b=40),
 )
 
-# 7) Display
-
 # Application
 app = dash.Dash(__name__)
 server = app.server
 
 app.layout = html.Div(
     [
-        # ─────────── Middle: Map + Detail Panel ───────────
         html.Div(
             style={"display": "flex", "width": "100%", "height": "80vh"},
             children=[
@@ -143,7 +135,7 @@ app.layout = html.Div(
                             children="Select a country",
                             style={"textAlign": "center", "margin": "0.5rem 0"},
                         ),
-                        # Stacked vertically:
+                        # Stacked vertically
                         dcc.Graph(
                             id="ratio-bar",
                             style={"width": "100%", "height": "80vh"},
